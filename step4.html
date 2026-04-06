@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Шаг 4 — Квиз недвижимости</title>
+<style>
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#0e0e0e;color:#fff;}
+.container{max-width:420px;margin:auto;padding:20px;}
+.logo{font-weight:bold;margin-bottom:20px;font-size:18px;}
+h1{font-size:22px;margin-bottom:20px;}
+input{width:100%;padding:14px;border-radius:12px;border:none;margin-top:10px;font-size:16px;}
+a.btn{display:block;width:100%;text-align:center;padding:14px;background:#ff4d4d;color:#fff;text-decoration:none;border-radius:12px;margin-top:15px;font-size:16px;}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="logo">REAL ESTATE QUIZ</div>
+<h1>Введите имя</h1>
+<input type="text" id="name" placeholder="Ваше имя">
+<a href="#" class="btn" onclick="goResult()">Далее</a>
+</div>
+
+<script>
+function goResult(){
+  const name=document.getElementById('name').value.trim();
+  if(!name){alert('Введите имя');return;}
+  const url='result.html?name='+encodeURIComponent(name);
+  window.location.href=url;
+}
+</script>
+</body>
+</html>
