@@ -108,23 +108,23 @@ img{
 <!-- ШАГ 1 -->
 <div class="step active" id="step1">
 <h1>Что вы ищете?</h1>
-<button onclick="next(2,'Квартира')">Квартира</button>
-<button onclick="next(2,'Дом')">Дом</button>
+<button onclick="nextStep(2, 'Квартира')">Квартира</button>
+<button onclick="nextStep(2, 'Дом')">Дом</button>
 </div>
 
 <!-- ШАГ 2 -->
 <div class="step" id="step2">
 <h1>Ваш бюджет</h1>
-<button onclick="next(3,'до 5 млн')">до 5 млн</button>
-<button onclick="next(3,'5-10 млн')">5-10 млн</button>
-<button onclick="next(3,'10+ млн')">10+ млн</button>
+<button onclick="nextStep(3, 'до 5 млн')">до 5 млн</button>
+<button onclick="nextStep(3, '5-10 млн')">5-10 млн</button>
+<button onclick="nextStep(3, '10+ млн')">10+ млн</button>
 </div>
 
 <!-- ШАГ 3 -->
 <div class="step" id="step3">
 <h1>Введите имя</h1>
 <input type="text" id="name" placeholder="Ваше имя">
-<button class="next" onclick="send()">Далее</button>
+<button class="next" onclick="sendForm()">Далее</button>
 </div>
 
 <!-- ФИНАЛ -->
@@ -148,17 +148,17 @@ img{
 let data = {};
 let progress = 25;
 
-function next(step, value){
+function nextStep(step, value){
   data['answer'] = value;
 
   document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
-  document.getElementById('step'+step).classList.add('active');
+  document.getElementById('step' + step).classList.add('active');
 
   progress += 25;
   document.getElementById('progress').style.width = progress + "%";
 }
 
-function send(){
+function sendForm(){
   const name = document.getElementById('name').value.trim();
 
   if(!name){
@@ -171,24 +171,24 @@ function send(){
   formData.append("answer", data.answer);
 
   fetch("https://formspree.io/f/mnjolzzv", {
-    method:"POST",
-    body:formData,
-    headers:{'Accept':'application/json'}
+    method: "POST",
+    body: formData,
+    headers: { 'Accept': 'application/json' }
   })
-  .then(res=>{
+  .then(function(res){
     if(res.ok){
-      next(4);
+      nextStep(4);
     } else {
       alert("Ошибка. Попробуйте без VPN");
     }
   })
-  .catch(()=>{
+  .catch(function(){
     alert("Ошибка сети. Попробуйте позже");
   });
 }
 
 function goTG(){
-  window.location.href="https://t.me/+_stlczeu_l0zMDIy";
+  window.location.href = "https://t.me/+_stlczeu_l0zMDIy";
 }
 
 </script>
