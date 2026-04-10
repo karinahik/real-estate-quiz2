@@ -9,8 +9,7 @@
 body{
   margin:0;
   font-family:-apple-system, BlinkMacSystemFont, sans-serif;
-  background:#0e0e0e;
-  color:#fff;
+  background:#f5f5f5;
 }
 
 .container{
@@ -19,74 +18,60 @@ body{
   padding:20px;
 }
 
-.logo{
-  font-weight:bold;
-  margin-bottom:15px;
+h2{
+  font-size:18px;
+  margin:20px 0 10px;
 }
 
-.progress{
-  height:6px;
-  background:#222;
-  border-radius:10px;
-  overflow:hidden;
-  margin-bottom:25px;
-}
-
-.progress-bar{
-  height:100%;
-  width:25%;
-  background:#ff4d4d;
-  transition:0.3s;
-}
-
-.step{
-  display:none;
-  animation:fade .3s;
-}
-
-.step.active{
-  display:block;
-}
-
-@keyframes fade{
-  from{opacity:0; transform:translateY(10px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-h1{
-  font-size:22px;
+.box{
+  display:flex;
+  gap:10px;
   margin-bottom:20px;
 }
 
-button{
-  width:100%;
+.option{
+  flex:1;
   padding:15px;
-  margin-top:10px;
-  border:none;
-  border-radius:14px;
-  background:#1c1c1c;
-  color:#fff;
-  font-size:16px;
+  border-radius:12px;
+  background:#eee;
+  text-align:center;
+  cursor:pointer;
 }
 
-button:hover{
-  background:#2a2a2a;
-}
-
-.next{
-  background:#ff4d4d;
+.option.active{
+  background:#ffc928;
 }
 
 input{
   width:100%;
   padding:15px;
-  border-radius:14px;
+  border-radius:12px;
   border:none;
-  margin-top:10px;
+  margin-bottom:15px;
   font-size:16px;
 }
 
-img{
+.radio{
+  margin-bottom:10px;
+}
+
+button{
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:14px;
+  background:#ffc928;
+  font-size:18px;
+  margin-top:20px;
+  cursor:pointer;
+}
+
+.success{
+  display:none;
+  text-align:center;
+}
+
+.success img{
   width:100%;
   border-radius:20px;
   margin-bottom:20px;
@@ -99,96 +84,117 @@ img{
 
 <div class="container">
 
-<div class="logo">REAL ESTATE QUIZ</div>
+<div id="form">
 
-<div class="progress">
-  <div class="progress-bar" id="progress"></div>
+<h2>Где хотите купить квартиру?</h2>
+
+<div class="box">
+  <div class="option" onclick="selectCity(this,'СПБ')">Петербург</div>
+  <div class="option" onclick="selectCity(this,'Москва')">Москва</div>
+  <div class="option" onclick="selectCity(this,'Дубай')">Дубай/ОАЭ</div>
 </div>
 
-<!-- ШАГ 1 -->
-<div class="step active" id="step1">
-<h1>Что вы ищете?</h1>
-<button onclick="nextStep(2, 'Квартира')">Квартира</button>
-<button onclick="nextStep(2, 'Дом')">Дом</button>
+<h2>Ваше имя</h2>
+<input type="text" id="name" placeholder="Введите ваше имя">
+
+<h2>Номер телефона</h2>
+<input type="tel" id="phone" placeholder="+7 (___) ___-__-__">
+
+<h2>Планируемый бюджет:</h2>
+<div class="radio">
+  <input type="radio" name="budget" value="до 10 млн"> До 10 млн
+</div>
+<div class="radio">
+  <input type="radio" name="budget" value="10-15 млн"> 10-15 млн
+</div>
+<div class="radio">
+  <input type="radio" name="budget" value="15+ млн"> Более 15 млн
 </div>
 
-<!-- ШАГ 2 -->
-<div class="step" id="step2">
-<h1>Ваш бюджет</h1>
-<button onclick="nextStep(3, 'до 5 млн')">до 5 млн</button>
-<button onclick="nextStep(3, '5-10 млн')">5-10 млн</button>
-<button onclick="nextStep(3, '10+ млн')">10+ млн</button>
+<h2>Как скоро?</h2>
+<div class="radio">
+  <input type="radio" name="time" value="срочно"> Как можно скорее
+</div>
+<div class="radio">
+  <input type="radio" name="time" value="2-3 месяца"> 2-3 месяца
+</div>
+<div class="radio">
+  <input type="radio" name="time" value="позже"> Позже
 </div>
 
-<!-- ШАГ 3 -->
-<div class="step" id="step3">
-<h1>Введите имя</h1>
-<input type="text" id="name" placeholder="Ваше имя">
-<button class="next" onclick="sendForm()">Далее</button>
+<button onclick="send()">Отправить</button>
+
 </div>
 
-<!-- ФИНАЛ -->
-<div class="step" id="step4">
+<!-- УСПЕХ -->
+<div class="success" id="success">
+
 <img src="photo.jpg">
 
-<h1>Спасибо за заявку</h1>
+<h2>Спасибо за заявку</h2>
 
 <p>
-Мы уже изучаем ваш запрос и скоро позвоним и напишем вам.<br><br>
-А пока подпишитесь на мой Telegram-канал с квартирами и акциями
+Мы уже изучаем ваш запрос и скоро свяжемся с вами.<br><br>
+Подпишитесь на Telegram канал:
 </p>
 
-<button class="next" onclick="goTG()">Перейти в Telegram</button>
+<button onclick="goTG()">Перейти в Telegram</button>
+
 </div>
 
 </div>
 
 <script>
 
-let data = {};
-let progress = 25;
+let city = "";
 
-function nextStep(step, value){
-  data['answer'] = value;
+function selectCity(el, value){
+  city = value;
 
-  document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
-  document.getElementById('step' + step).classList.add('active');
-
-  progress += 25;
-  document.getElementById('progress').style.width = progress + "%";
+  document.querySelectorAll('.option').forEach(e=>e.classList.remove('active'));
+  el.classList.add('active');
 }
 
-function sendForm(){
-  const name = document.getElementById('name').value.trim();
+function send(){
 
-  if(!name){
-    alert("Введите имя");
+  const name = document.getElementById('name').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const budget = document.querySelector('input[name="budget"]:checked');
+  const time = document.querySelector('input[name="time"]:checked');
+
+  if(!city || !name || !phone || !budget || !time){
+    alert("Заполните все поля");
     return;
   }
 
   const formData = new FormData();
+  formData.append("city", city);
   formData.append("name", name);
-  formData.append("answer", data.answer);
+  formData.append("phone", phone);
+  formData.append("budget", budget.value);
+  formData.append("time", time.value);
 
   fetch("https://formspree.io/f/mnjolzzv", {
-    method: "POST",
-    body: formData,
-    headers: { 'Accept': 'application/json' }
+    method:"POST",
+    body:formData,
+    headers:{'Accept':'application/json'}
   })
-  .then(function(res){
+  .then(res=>{
     if(res.ok){
-      nextStep(4);
+      document.getElementById('form').style.display="none";
+      document.getElementById('success').style.display="block";
     } else {
       alert("Ошибка. Попробуйте без VPN");
     }
   })
-  .catch(function(){
-    alert("Ошибка сети. Попробуйте позже");
+  .catch(()=>{
+    alert("Ошибка сети");
   });
+
 }
 
 function goTG(){
-  window.location.href = "https://t.me/+_stlczeu_l0zMDIy";
+  window.location.href="https://t.me/+_stlczeu_l0zMDIy";
 }
 
 </script>
