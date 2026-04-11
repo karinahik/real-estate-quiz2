@@ -98,7 +98,7 @@ button{
 <input type="text" id="name" placeholder="Введите ваше имя">
 
 <h2>Номер телефона</h2>
-<input type="tel" id="phone" placeholder="+7 (___) ___-__-__">
+<input type="tel" id="phone" value="+7 " oninput="fixPhone(this)">
 
 <h2>Планируемый бюджет:</h2>
 <div class="radio">
@@ -153,6 +153,12 @@ function selectCity(el, value){
 
   document.querySelectorAll('.option').forEach(e=>e.classList.remove('active'));
   el.classList.add('active');
+}
+
+function fixPhone(input){
+  if(!input.value.startsWith('+7')){
+    input.value = '+7 ';
+  }
 }
 
 function send(){
