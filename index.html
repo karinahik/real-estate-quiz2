@@ -18,41 +18,72 @@ body{
   padding:20px;
 }
 
-h2{
-  font-size:18px;
-  margin:20px 0 10px;
+h1{
+  font-size:20px;
+  margin-bottom:15px;
 }
 
-.box{
+.block{
+  margin-bottom:25px;
+}
+
+.options{
   display:flex;
   gap:10px;
-  margin-bottom:20px;
 }
 
 .option{
   flex:1;
-  padding:15px;
-  border-radius:12px;
-  background:#eee;
+  padding:14px;
+  border-radius:14px;
+  background:#eaeaea;
   text-align:center;
   cursor:pointer;
 }
 
 .option.active{
-  background:#ffc928;
+  background:#ffd233;
 }
 
 input{
   width:100%;
   padding:15px;
-  border-radius:12px;
+  border-radius:14px;
   border:none;
-  margin-bottom:15px;
+  margin-top:10px;
   font-size:16px;
+  box-sizing:border-box;
 }
 
 .radio{
-  margin-bottom:10px;
+  display:flex;
+  align-items:center;
+  margin-top:10px;
+  cursor:pointer;
+}
+
+.radio input{
+  display:none;
+}
+
+.circle{
+  width:18px;
+  height:18px;
+  border:2px solid #aaa;
+  border-radius:50%;
+  margin-right:10px;
+  position:relative;
+}
+
+.radio input:checked + .circle::after{
+  content:'';
+  width:10px;
+  height:10px;
+  background:#ffd233;
+  border-radius:50%;
+  position:absolute;
+  top:2px;
+  left:2px;
 }
 
 button{
@@ -60,18 +91,18 @@ button{
   padding:16px;
   border:none;
   border-radius:14px;
-  background:#ffc928;
-  font-size:18px;
+  background:#ffd233;
+  font-size:16px;
   margin-top:20px;
   cursor:pointer;
 }
 
-.success{
+.final{
   display:none;
   text-align:center;
 }
 
-.success img{
+img{
   width:100%;
   border-radius:20px;
   margin-bottom:20px;
@@ -82,83 +113,106 @@ button{
 
 <body>
 
-<div class="container">
+<div class="container" id="form">
 
-<div id="form">
-
-<h2>Где хотите купить квартиру?</h2>
-
-<div class="box">
-  <div class="option" onclick="selectCity(this,'СПБ')">Петербург</div>
-  <div class="option" onclick="selectCity(this,'Москва')">Москва</div>
-  <div class="option" onclick="selectCity(this,'Дубай')">Дубай/ОАЭ</div>
+<!-- ГОРОД -->
+<div class="block">
+<h1>Где хотите купить квартиру?</h1>
+<div class="options">
+<div class="option" onclick="select(this,'city','Петербург')">Петербург</div>
+<div class="option" onclick="select(this,'city','Москва')">Москва</div>
+<div class="option" onclick="select(this,'city','Дубай')">Дубай/ОАЭ</div>
+</div>
 </div>
 
-<h2>Ваше имя</h2>
+<!-- ИМЯ -->
+<div class="block">
+<h1>Ваше имя</h1>
 <input type="text" id="name" placeholder="Введите ваше имя">
-
-<h2>Номер телефона</h2>
-<input type="tel" id="phone" value="+7 " oninput="fixPhone(this)">
-
-<h2>Планируемый бюджет:</h2>
-<div class="radio">
-  <input type="radio" name="budget" value="до 10 млн"> До 10 млн
-</div>
-<div class="radio">
-  <input type="radio" name="budget" value="10-15 млн"> 10-15 млн
-</div>
-<div class="radio">
-  <input type="radio" name="budget" value="15+ млн"> Более 15 млн
 </div>
 
-<h2>Как скоро?</h2>
-<div class="radio">
-  <input type="radio" name="time" value="срочно"> Как можно скорее
+<!-- ТЕЛЕФОН -->
+<div class="block">
+<h1>Номер телефона</h1>
+<input type="tel" id="phone" value="+7">
 </div>
-<div class="radio">
-  <input type="radio" name="time" value="2-3 месяца"> 2-3 месяца
+
+<!-- БЮДЖЕТ -->
+<div class="block">
+<h1>Планируемый бюджет:</h1>
+
+<label class="radio">
+<input type="radio" name="budget" value="до 10 млн">
+<div class="circle"></div>
+<span>Меньше 10 млн рублей</span>
+</label>
+
+<label class="radio">
+<input type="radio" name="budget" value="10-15 млн">
+<div class="circle"></div>
+<span>10-15 млн рублей</span>
+</label>
+
+<label class="radio">
+<input type="radio" name="budget" value="15+ млн">
+<div class="circle"></div>
+<span>Больше 15 млн рублей</span>
+</label>
+
 </div>
-<div class="radio">
-  <input type="radio" name="time" value="позже"> Позже
+
+<!-- СРОК -->
+<div class="block">
+<h1>Как скоро?</h1>
+
+<label class="radio">
+<input type="radio" name="time" value="срочно">
+<div class="circle"></div>
+<span>Как можно скорее</span>
+</label>
+
+<label class="radio">
+<input type="radio" name="time" value="2-3 месяца">
+<div class="circle"></div>
+<span>В ближайшие 2-3 месяца</span>
+</label>
+
+<label class="radio">
+<input type="radio" name="time" value="позже">
+<div class="circle"></div>
+<span>Через 3 месяца и позже</span>
+</label>
+
 </div>
 
 <button onclick="send()">Отправить</button>
 
 </div>
 
-<!-- УСПЕХ -->
-<div class="success" id="success">
+<!-- ФИНАЛ -->
+<div class="container final" id="final">
 
 <img src="photo.jpg">
 
-<h2>Спасибо за заявку</h2>
+<h1>Спасибо за заявку</h1>
 
 <p>
-Мы уже изучаем ваш запрос и скоро свяжемся с вами.<br><br>
-Подпишитесь на Telegram канал:
+Мы уже изучаем ваш запрос и скоро позвоним и напишем вам.<br><br>
+А пока подпишитесь на мой Telegram-канал с квартирами и акциями
 </p>
 
 <button onclick="goTG()">Перейти в Telegram</button>
 
 </div>
 
-</div>
-
 <script>
 
-let city = "";
+let data = {};
 
-function selectCity(el, value){
-  city = value;
-
-  document.querySelectorAll('.option').forEach(e=>e.classList.remove('active'));
+function select(el, key, value){
+  document.querySelectorAll(`[onclick*="${key}"]`).forEach(e=>e.classList.remove('active'));
   el.classList.add('active');
-}
-
-function fixPhone(input){
-  if(!input.value.startsWith('+7')){
-    input.value = '+7 ';
-  }
+  data[key] = value;
 }
 
 function send(){
@@ -168,13 +222,13 @@ function send(){
   const budget = document.querySelector('input[name="budget"]:checked');
   const time = document.querySelector('input[name="time"]:checked');
 
-  if(!city || !name || !phone || !budget || !time){
+  if(!data.city || !name || !phone || !budget || !time){
     alert("Заполните все поля");
     return;
   }
 
   const formData = new FormData();
-  formData.append("city", city);
+  formData.append("city", data.city);
   formData.append("name", name);
   formData.append("phone", phone);
   formData.append("budget", budget.value);
@@ -188,13 +242,13 @@ function send(){
   .then(res=>{
     if(res.ok){
       document.getElementById('form').style.display="none";
-      document.getElementById('success').style.display="block";
+      document.getElementById('final').style.display="block";
     } else {
-      alert("Ошибка. Попробуйте без VPN");
+      alert("Ошибка. Попробуйте выключить VPN и обновить страницу");
     }
   })
   .catch(()=>{
-    alert("Ошибка сети");
+    alert("Ошибка сети. Попробуйте позже");
   });
 
 }
