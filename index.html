@@ -125,7 +125,7 @@ img{
 <div class="block">
 <h1>Где хотите купить квартиру?</h1>
 <div class="options">
-<div class="option" onclick="select(this,'city','Петербург')">Петербург</div>
+<div class="option" onclick="select(this,'city','Красноярск')">Красноярск</div>
 <div class="option" onclick="select(this,'city','Москва')">Москва</div>
 <div class="option" onclick="select(this,'city','Дубай')">Дубай/ОАЭ</div>
 </div>
@@ -140,7 +140,7 @@ img{
 <!-- ТЕЛЕФОН -->
 <div class="block">
 <h1>Номер телефона</h1>
-<input type="tel" id="phone" value="+7 " oninput="fixPhone(this)">
+<input type="tel" id="phone" value="+7" oninput="fixPhone(this)">
 </div>
 
 <!-- БЮДЖЕТ -->
@@ -222,9 +222,16 @@ function select(el, key, value){
 }
 
 function fixPhone(input){
-  if(!input.value.startsWith('+7')){
-    input.value = '+7 ';
+
+  let numbers = input.value.replace(/\D/g, "");
+
+  if(!numbers.startsWith("7")){
+    numbers = "7";
   }
+
+  numbers = numbers.substring(0,10);
+
+  input.value = "+" + numbers;
 }
 
 function send(){
