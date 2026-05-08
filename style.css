@@ -1,0 +1,1515 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  background: #ffffff;
+  color: #111;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 22px 34px;
+}
+
+/* Фото слева от текста; узкая колонка — масштаб как на макете */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(72px, clamp(88px, 30vw, 300px)) minmax(0, 1fr);
+  column-gap: clamp(8px, 2vw, 20px);
+  align-items: start;
+
+}
+
+.hero-img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  margin: 0;
+  align-self: start;
+  justify-self: start;
+  object-fit: contain;
+  object-position: left top;
+}
+
+.hero-lead {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: relative;
+  margin-bottom: 0;
+  min-height: 0;
+  min-width: 0;
+  max-width: 640px;
+}
+
+  /* Многострочный заголовок; на десктопе — справа от фото, над title.png */
+  .hero-title {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.08em;
+    margin: 0 0 8px 0;
+    font-size: clamp(14px, 3.8vw, 20px);
+    line-height: 1.12;
+    color: #000;
+    text-align: left;
+  }
+
+.hero-title__row {
+  display: flex;
+  align-items: baseline;
+  width: 100%;
+  font-size: clamp(15px, 4vw, 22px);
+}
+
+  .hero-title__row--bold {
+    font-weight: 700;
+    padding-top: 0;
+  }
+
+  .hero-title__row--reg {
+    font-weight: 400;
+    font-size: clamp(12px, 3.2vw, 18px);
+  }
+
+  .hero-title__mark {
+    display: inline-flex;
+    width: fit-content;
+    font-weight: 700;
+    color: #000;
+    font-size: clamp(13px, 3.6vw, 20px);
+    /* «Кисть» по краям */
+    background: linear-gradient(
+      90deg,
+      rgba(255, 210, 0, 0.15) 0%,
+      #ffcc00 5%,
+      #ffd10a 50%,
+      #ffcc00 95%,
+      rgba(255, 210, 0, 0.2) 100%
+    );
+    padding: 0.12em 0.22em 0.14em 0.14em;
+    margin: 0 0 0 -0.06em;
+    border-radius: 0.1em 0.18em 0.1em 0.08em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  .hand {
+    font-family: "Caveat", cursive;
+  font-size: clamp(22px, 4.6vw, 30px);
+    color: #000;
+    margin-bottom: 20px;
+  }
+
+.desc {
+  color: #3a3a3a;
+  font-size: clamp(12px, 3.1vw, 15px);
+  line-height: 1.3;
+  max-width: none;
+  margin: 6px 0 0 0;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    grid-template-columns: minmax(180px, clamp(200px, 26vw, 340px)) minmax(0, 1fr);
+    align-items: start;
+    margin-bottom: 24px;
+  }
+
+  .hero-img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: clamp(260px, 36vw, 440px);
+    object-fit: contain;
+    object-position: left top;
+  }
+
+  .hero-lead {
+    justify-content: flex-start;
+    align-self: start;
+    padding: 0 0 clamp(16px, 2.5vw, 32px) clamp(8px, 1.5vw, 20px);
+    width: 100%;
+  }
+
+  .hero-title__row--bold {
+    padding-top: 0;
+  }
+
+  .hero-title {
+    font-size: clamp(32px, 3.2vw, 46px);
+    margin-bottom: clamp(14px, 2vw, 22px);
+  }
+
+  .hero-title__row {
+    font-size: clamp(34px, 3.4vw, 50px);
+  }
+
+  .hero-title__row--reg {
+    font-size: clamp(24px, 2.2vw, 36px);
+  }
+
+  .hero-title__mark {
+    font-size: clamp(28px, 2.6vw, 44px);
+  }
+
+  .desc {
+    font-size: clamp(17px, 1.35vw, 19px);
+    line-height: 1.4;
+    margin-top: clamp(12px, 1.8vw, 20px);
+  }
+
+  .caption-title {
+    max-width: 100%;
+  }
+}
+
+/* 400–800px: фото слева, без растягивания по высоте строки */
+@media (min-width: 400px) and (max-width: 800px) {
+  .hero {
+    align-items: start;
+  }
+
+  .hero-img {
+    object-fit: contain;
+    object-position: left top;
+    max-height: clamp(220px, 50vw, 400px);
+  }
+
+  .hero-lead {
+    min-height: 0;
+    justify-content: flex-start;
+  }
+}
+
+/* QUIZ LAYOUT (как на макете) */
+
+.quiz {
+  margin-top: 18px;
+}
+
+.q {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  column-gap: 18px;
+  align-items: start;
+  /* padding: 10px 0 0; */
+}
+
+.q + .q {
+  margin-top: 18px;
+}
+
+.q__num {
+  font-family: "Caveat", cursive;
+  font-weight: 500;
+  font-size: 72px;
+  line-height: 1;
+  color: #f4c000;
+  letter-spacing: 0.02em;
+  transform: rotate(-2deg);
+  margin-top: -8px;
+}
+
+.q__main {
+  padding-top: 6px;
+}
+
+.q__title {
+  font-size: clamp(24px, 4.8vw, 30px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #111;
+  margin: 0 0 14px;
+}
+
+.q__row {
+  display: grid;
+  gap: 14px;
+}
+
+.q__row--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.q__row--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Pill buttons (01/03) */
+
+.pill {
+  appearance: none;
+  border: 1px solid #e8e8e8;
+  background: #f4f4f4;
+  border-radius: 14px;
+  padding: 18px 16px;
+  font-size: 19px;
+  font-weight: 600;
+  color: #2b2b2b;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+    border-color 0.15s ease, background 0.15s ease;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+  position: relative;
+  text-align: center;
+}
+
+.pill:hover {
+  transform: translateY(-1px);
+}
+
+.pill--active {
+  background: #f4c000;
+  border-color: #f4c000;
+  color: #121212;
+  box-shadow: 0 10px 18px rgba(244, 192, 0, 0.22);
+}
+
+/* на макете у плашек нет отдельного "радио-кружка" справа */
+
+/* Cards (02) */
+
+.card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 18px;
+  border-radius: 14px;
+  border: 2px solid #ededed;
+  background: #ffffff;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+    border-color 0.15s ease;
+  min-height: 66px;
+}
+
+.card:hover {
+  transform: translateY(-1px);
+}
+
+.card__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #f4c000;
+  color: #111;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+}
+
+.card__label {
+  font-size: 19px;
+  font-weight: 600;
+  color: #1b1b1b;
+}
+
+.card__check,
+.card__radio {
+  margin-left: auto;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+}
+
+.card__radio {
+  border: 2px solid #d8d8d8;
+  background: #fff;
+}
+
+.card__check {
+  background: #f4c000;
+  color: #ffffff;
+}
+
+.card--active {
+  border-color: #f4c000;
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.06);
+}
+
+.card--active .card__radio {
+  border-color: #f4c000;
+  background: #fff;
+}
+
+.card:not(.card--active) .card__check {
+  display: none;
+}
+
+.card--active .card__radio {
+  display: none;
+}
+
+/* Input fields (04/05) */
+
+.field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 64px;
+  border-radius: 14px;
+  border: 2px solid #ededed;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.field__input {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  outline: none;
+  font-size: 19px;
+  font-weight: 500;
+  padding: 0 54px 0 18px;
+  color: #1b1b1b;
+  background: transparent;
+}
+
+.field__input::placeholder {
+  color: #b7b7b7;
+  font-weight: 500;
+}
+
+.field__icon {
+  position: absolute;
+  right: 16px;
+  color: #111;
+  opacity: 0.9;
+  display: grid;
+  place-items: center;
+}
+
+.field--phone .field__input {
+  padding-left: 78px;
+}
+
+.field__flag {
+  position: absolute;
+  left: 14px;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.field__prefix {
+  position: absolute;
+  left: 42px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111;
+}
+
+/* Кнопка отправки: ровная плашка, без градиента по краям */
+
+.submit {
+  margin-top: 22px;
+  width: 100%;
+  height: 100px;
+  box-sizing: border-box;
+  border: 0;
+  cursor: pointer;
+  padding: 0 20px;
+  color: #111;
+  font-family: inherit;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.2;
+  position: relative;
+  overflow: visible;
+  border-radius: 16px;
+  background: #ffcc00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.submit__text {
+  flex: 0 1 auto;
+}
+
+.submit__arrow {
+  flex-shrink: 0;
+  font-size: 1.15em;
+  line-height: 1;
+  translate: 0 1px;
+}
+
+.submit:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+}
+
+.submit:active {
+  transform: translateY(0);
+  filter: brightness(0.98);
+}
+
+/* Benefits (под кнопкой) */
+
+.benefits {
+  margin-top: 16px;
+}
+
+.benefits__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+}
+
+.benefit {
+  padding: 14px;
+  position: relative;
+}
+
+.benefit + .benefit::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 1px;
+  background: rgba(0, 0, 0, 0.12);
+}
+
+/* Сетка 4 в ряд: внешние границы слева у 1-го и справа у 1-го и 4-го */
+@media (min-width: 781px) {
+  .benefit:first-child::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10px;
+    bottom: 10px;
+    width: 1px;
+    background: rgba(0, 0, 0, 0.12);
+  }
+
+  .benefit:first-child::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 10px;
+    bottom: 10px;
+    width: 1px;
+    background: rgba(0, 0, 0, 0.12);
+  }
+
+  .benefit:last-child::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 10px;
+    bottom: 10px;
+    width: 1px;
+    background: rgba(0, 0, 0, 0.12);
+  }
+
+  /* Правая линия 1-го совпадает с общей линией слева у 2-го — не дублируем */
+  .benefit:first-child + .benefit::before {
+    display: none;
+  }
+}
+
+.benefit__top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 54px;
+}
+
+.benefit__icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  background: #f4c000;
+  color: #111;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  box-shadow: 0 10px 18px rgba(244, 192, 0, 0.18);
+}
+
+.benefit__icon img {
+  width: 24px;
+  height: 24px;
+  display: block;
+  /* если SVG со своей заливкой — пусть будет "как есть" */
+}
+
+.benefit__num {
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: rgba(0, 0, 0, 0.14);
+}
+
+.benefit__text {
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #111;
+}
+
+  /* SUCCESS (разметка в <template>, в DOM до отправки не попадает) */
+
+  .success-page {
+    text-align: center;
+    padding: 24px 0 40px;
+  }
+
+  .success-page h2 {
+    margin: 0 0 16px;
+    font-size: clamp(22px, 5vw, 28px);
+  }
+
+  .success-page p {
+    margin: 0 auto 24px;
+    color: #3a3a3a;
+    line-height: 1.45;
+    max-width: 520px;
+  }
+
+  .success-page button {
+    appearance: none;
+    border: 0;
+    border-radius: 14px;
+    padding: 16px 24px;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    background: #f4c000;
+    color: #121212;
+  }
+  /* Подпись: обрезанный PNG, без зазора под картинкой (как иконка) */
+  .title-pict {
+    display: block;
+    width: 100%;
+    line-height: 0;
+  }
+
+  .caption-title {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0;
+    object-fit: contain;
+    object-position: left top;
+  }
+
+@media (max-width: 780px) {
+  .container {
+    max-width: none;
+    padding: 18px 16px 28px;
+  }
+
+  .q {
+    grid-template-columns: 70px 1fr;
+    column-gap: 14px;
+  }
+
+  .q__num {
+    font-size: 60px;
+  }
+
+  .q__title {
+    font-size: clamp(20px, 5.6vw, 24px);
+  }
+
+  .q__row--3 {
+    grid-template-columns: 1fr;
+  }
+
+  .benefits__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 0;
+  }
+
+  .benefit {
+    padding: 10px 8px 6px;
+  }
+
+  .benefit + .benefit::before {
+    display: none;
+  }
+}
+@media (max-width: 560px) {
+  .container {
+    max-width: none;
+    padding: 16px 10px 24px;
+  }
+
+  .q {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+    row-gap: 8px;
+  }
+
+  .q__num {
+    font-size: 44px;
+    margin-top: 0;
+    transform: rotate(-1deg);
+  }
+
+  .q__main {
+    padding-top: 0;
+  }
+
+  .q__row--2 {
+    grid-template-columns: 1fr;
+  }
+
+  .pill {
+    padding: 16px 14px;
+    font-size: 17px;
+    border-radius: 14px;
+  }
+
+  .card {
+    padding: 16px 16px;
+    min-height: 62px;
+  }
+
+  .card__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+  }
+
+  .card__label {
+    font-size: 17px;
+  }
+
+  .field {
+    height: 58px;
+  }
+
+  .field__input {
+    font-size: 17px;
+    padding-right: 50px;
+    padding-left: 16px;
+  }
+
+  .field--phone .field__input {
+    padding-left: 74px;
+  }
+
+  .submit {
+    font-size: 18px;
+    max-height: 60px;
+  }
+
+  .benefits__grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .hero-lead {
+    justify-content: flex-start;
+    align-self: start;
+    padding-top: 0;
+    width: 100%;
+  }
+  .benefit {
+    display: grid;
+    grid-template-columns: 128px 1fr;
+    align-items: center;
+    column-gap: 14px;
+    padding: 14px 0;
+    min-height: 78px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .benefit__top {
+    min-height: 0;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .benefit__text {
+    margin-top: 0;
+    justify-self: end;
+    text-align: right;
+    font-size: 16px;
+    line-height: 1.25;
+  }
+}
+
+@media (max-width: 420px) {
+  .container {
+    max-width: none;
+    padding: 14px 8px 22px;
+  }
+  
+
+  .hero {
+    grid-template-columns: minmax(64px, clamp(76px, 38vw, 200px)) minmax(0, 1fr);
+    column-gap: 6px;
+  }
+
+  .hero-img {
+    max-height: 180px;
+  }
+
+  .hero-title__row--bold {
+    font-weight: 700;
+    padding-top: 0;
+ 
+    
+  }
+
+  .benefit {
+    grid-template-columns: 112px 1fr;
+    min-height: 74px;
+  }
+
+  .hero-title {
+    font-size: clamp(13px, 3.6vw, 18px);
+  }
+
+  .hero-title__row {
+    font-size: 18px
+  }
+
+  .hero-title__row--reg {
+    font-size: 16px
+  }
+
+  .hero-title__mark {
+    font-size: 18px
+  }
+
+  .desc {
+    font-size: clamp(11px, 2.9vw, 14px);
+  }
+
+  .q__title {
+    font-size: clamp(18px, 5.4vw, 22px);
+  }
+
+  .pill {
+    padding: 14px 12px;
+    font-size: 16px;
+    border-radius: 12px;
+  }
+
+  .card {
+    padding: 14px 14px;
+    border-radius: 12px;
+  }
+
+  .field {
+    height: 56px;
+    border-radius: 12px;
+  }
+
+  .submit {
+    font-size: 17px;
+    max-height: 60px;
+  }
+}
+
+/* ——— Отзывы: фон, 3D-карусель (десктоп), слайдер (моб.) ——— */
+
+.reviews {
+  /* padding-bottom: 10px; */
+}
+
+/* Фон только внутри колонки сайта (как .container) */
+.reviews__shell {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+  /* border-radius: 18px; */
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.reviews__bg {
+  position: absolute;
+  inset: 0;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: brightness(1.12);
+}
+
+.reviews__overlay {
+  position: absolute;
+  inset: 0;
+  /* Плавное «растворение» к белому по левому, правому и верхнему краю */
+  background:
+    linear-gradient(
+      90deg,
+      #fff 0%,
+      rgba(255, 255, 255, 0) clamp(56px, 14vw, 180px)
+    ),
+    linear-gradient(
+      270deg,
+      #fff 0%,
+      rgba(255, 255, 255, 0) clamp(56px, 14vw, 180px)
+    ),
+    linear-gradient(
+      180deg,
+      #fff 0%,
+      rgba(255, 255, 255, 0) clamp(48px, 12vw, 140px)
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.78) 0%,
+      rgba(255, 255, 255, 0.68) 42%,
+      rgba(252, 252, 252, 0.72) 100%
+    ),
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(255, 255, 255, 0.35) 0%,
+      transparent 100%
+    );
+  pointer-events: none;
+}
+
+.reviews__content {
+  position: relative;
+  z-index: 1;
+}
+
+.reviews__heading {
+  margin: 0 auto;
+  max-width: 920px;
+  text-align: center;
+  font-size: clamp(20px, 4vw, 32px);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #1a1a1a;
+}
+
+.reviews__lead {
+  margin: 14px auto 0;
+  max-width: 640px;
+  text-align: center;
+  font-size: clamp(15px, 2.3vw, 18px);
+  line-height: 1.45;
+  color: #555;
+}
+
+.reviews__carousel {
+  margin-top: clamp(28px, 5vw, 40px);
+}
+
+.reviews__stage {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.reviews__arrow {
+  position: absolute;
+  z-index: 6;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: auto;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  color: #666;
+  cursor: pointer;
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(0, 0, 0, 0.06);
+  transition: color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+}
+
+.reviews__arrow--prev {
+  left: 10px;
+}
+
+.reviews__arrow--next {
+  right: 10px;
+}
+
+.reviews__arrow svg {
+  display: block;
+  width: 20px;
+  height: 36px;
+}
+
+.reviews__arrow:hover {
+  color: #333;
+  background: #fff;
+  transform: translateY(-50%) scale(1.04);
+}
+
+.reviews__arrow:active {
+  transform: translateY(-50%) scale(0.98);
+}
+
+.reviews__viewport {
+  flex: 1 1 auto;
+  min-width: 0;
+  outline: none;
+  position: relative;
+}
+
+/* Десктоп: «стек» из трёх карточек */
+
+@media (min-width: 768px) {
+  .reviews__viewport {
+    overflow: visible;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .reviews__track {
+    --reviews-shift: clamp(210px, 23vw, 270px);
+    position: relative;
+    min-height: clamp(380px, 44vw, 480px);
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    perspective: 1600px;
+    transform-style: preserve-3d;
+  }
+
+  .reviews__track .review-card {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: min(400px, 82%);
+    max-width: 400px;
+    margin: 0;
+    transform-origin: 50% 50%;
+    transition:
+      transform 0.55s cubic-bezier(0.33, 1, 0.48, 1),
+      opacity 0.45s ease,
+      filter 0.45s ease,
+      box-shadow 0.45s ease;
+    will-change: transform;
+  }
+
+  .review-card--center {
+    z-index: 5;
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    filter: none;
+  }
+
+  .review-card--left {
+    z-index: 3;
+    transform: translate(
+        calc(-50% - var(--reviews-shift)),
+        -50%
+      )
+      scale(0.88);
+    opacity: 0.9;
+    filter: brightness(0.98);
+  }
+
+  .review-card--right {
+    z-index: 3;
+    transform: translate(
+        calc(-50% + var(--reviews-shift)),
+        -50%
+      )
+      scale(0.88);
+    opacity: 0.9;
+    filter: brightness(0.98);
+  }
+
+  .review-card--hidden {
+    z-index: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.72);
+    opacity: 0;
+    filter: blur(2px);
+  }
+}
+
+/* Мобильный: горизонтальный слайдер */
+
+@media (max-width: 767px) {
+  .reviews__shell {
+    border-radius: 14px;
+    padding-left: clamp(10px, 2.5vw, 14px);
+    padding-right: clamp(10px, 2.5vw, 14px);
+  }
+
+  .reviews__heading {
+    font-size: clamp(17px, 4.5vw, 22px);
+  }
+
+  .reviews__lead {
+    font-size: 13px;
+    margin-top: 10px;
+  }
+
+  .reviews__stage {
+    align-self: stretch;
+  }
+
+  .reviews__viewport {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    width: 100%;
+    container-type: inline-size;
+    container-name: reviews-view;
+  }
+
+  .reviews__viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .reviews__arrow {
+    width: 25px;
+    height: 25px;
+    box-shadow:
+      0 1px 6px rgba(0, 0, 0, 0.14),
+      0 0 0 1px rgba(0, 0, 0, 0.05);
+  }
+
+  .reviews__arrow--prev {
+    left: -8px;
+  }
+
+  .reviews__arrow--next {
+    right: -8px;
+  }
+
+  .reviews__arrow svg {
+    width: 10px;
+    height: 18px;
+  }
+
+  .reviews__arrow:hover {
+    transform: translateY(-50%) scale(1.06);
+  }
+
+  .reviews__arrow:active {
+    transform: translateY(-50%) scale(0.95);
+  }
+
+  .reviews__track {
+    display: flex;
+    min-width: 100%;
+    gap: 0;
+    padding: 2px 0 8px;
+    min-height: 0;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+
+  .reviews__track::before,
+  .reviews__track::after {
+    display: none;
+  }
+
+  .reviews__track .review-card {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    opacity: 1;
+    filter: none;
+    pointer-events: auto;
+  }
+
+  .review-card {
+    padding: 11px 12px 12px;
+    border-radius: 12px;
+    box-shadow:
+      0 8px 22px rgba(0, 0, 0, 0.08),
+      0 1px 4px rgba(0, 0, 0, 0.04);
+  }
+
+  .review-card__head {
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    grid-template-rows: auto auto;
+    column-gap: 10px;
+    row-gap: 6px;
+    align-items: start;
+    margin-bottom: 8px;
+  }
+
+  .review-card__avatar {
+    grid-column: 1;
+    grid-row: 1;
+    width: 36px;
+    height: 36px;
+    font-size: 12px;
+    border-radius: 50%;
+  }
+
+  .review-card__avatar--light {
+    font-size: 15px;
+  }
+
+  .review-card__who {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+  }
+
+  .review-card__who--grow {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .review-card__head .review-card__subscribe,
+  .review-card__head .review-card__more {
+    grid-column: 3;
+    grid-row: 1;
+    align-self: start;
+  }
+
+  .review-card__head .review-card__stars {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin: 0;
+    justify-self: start;
+    align-self: start;
+    font-size: 12px;
+    letter-spacing: 0.2px;
+  }
+
+  .review-card__name {
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+  .review-card__meta {
+    font-size: 11px;
+    line-height: 1.35;
+    margin-top: 1px;
+    word-break: break-word;
+  }
+
+  .review-card__name-row {
+    gap: 3px 5px;
+  }
+
+  .review-card__rating-row {
+    gap: 6px 10px;
+    margin-bottom: 8px;
+  }
+
+  .review-card__rating-row .review-card__stars {
+    font-size: 12px;
+  }
+
+  .review-card__date {
+    font-size: 11px;
+  }
+
+  .review-card__text {
+    font-size: 12px;
+    line-height: 1.45;
+    color: #222;
+  }
+
+  .review-card__foot {
+    margin-top: 10px;
+    padding-top: 8px;
+  }
+
+  .review-card__comments,
+  .review-card__chip,
+  .review-card__stat {
+    font-size: 12px;
+  }
+
+  .review-card__stars--block {
+    margin: 0 0 8px;
+    font-size: 12px;
+  }
+
+  .review-card__subscribe {
+    font-size: 12px;
+  }
+
+  .review-card--hidden,
+  .review-card--left,
+  .review-card--center,
+  .review-card--right {
+    transform: none;
+    opacity: 1;
+    filter: none;
+    pointer-events: auto;
+  }
+}
+
+/* Точная ширина слайда = ширина области прокрутки (моб. отзывы) */
+@container reviews-view (min-width: 0) {
+  .reviews__track .review-card {
+    flex: 0 0 100cqi;
+    width: 100cqi;
+    max-width: 100cqi;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reviews__track .review-card {
+    transition: none;
+  }
+}
+
+/* Карточка отзыва */
+
+.review-card {
+  box-sizing: border-box;
+  border-radius: 14px;
+  background: #fff;
+  padding: clamp(18px, 3vw, 22px) clamp(18px, 3vw, 24px);
+  box-shadow:
+    0 14px 36px rgba(0, 0, 0, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.review-card__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.review-card__avatar {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+  font-weight: 600;
+  background: var(--avatar-bg, #f0f0f0);
+  color: var(--avatar-fg, #5c5c5c);
+  line-height: 1;
+}
+
+.review-card__avatar--light {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.review-card__who {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.review-card__who--grow {
+  flex: 1 1 auto;
+}
+
+.review-card__name-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 6px;
+}
+
+.review-card__name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+  line-height: 1.25;
+}
+
+.review-card__dot {
+  color: #999;
+  font-weight: 400;
+}
+
+.review-card__meta {
+  font-size: 13px;
+  line-height: 1.35;
+  color: #888;
+  margin-top: 2px;
+}
+
+.review-card__name-row + .review-card__meta {
+  margin-top: 4px;
+}
+
+.review-card__stars {
+  flex: 0 0 auto;
+  margin-left: auto;
+  align-self: flex-start;
+  letter-spacing: 1px;
+  font-size: 16px;
+  line-height: 1;
+  color: #f4c000;
+}
+
+.review-card__stars--inline {
+  margin-left: 0;
+  letter-spacing: 0.5px;
+}
+
+.review-card__stars--block {
+  margin: 0 0 12px;
+  align-self: flex-start;
+}
+
+.review-card__rating-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  margin-bottom: 12px;
+}
+
+.review-card__date {
+  font-size: 13px;
+  color: #888;
+}
+
+.review-card__text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #222;
+}
+
+.review-card__foot {
+  display: flex;
+  align-items: center;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+}
+
+.review-card__foot--rich {
+  justify-content: flex-start;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.review-card__comments {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  line-height: 1;
+  vertical-align: middle;
+  color: #8e8e93;
+}
+
+.review-card__stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  line-height: 1;
+  vertical-align: middle;
+  color: #8e8e93;
+}
+
+.review-card__comments svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+.review-card__chip svg,
+.review-card__stat svg {
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+.review-card__stat svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.review-card__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #8e8e93;
+  font: inherit;
+  font-size: 14px;
+  cursor: default;
+}
+
+.review-card__stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #8e8e93;
+  font-size: 14px;
+}
+
+.review-card__stat--push {
+  margin-left: auto;
+}
+
+.review-card__more {
+  flex: 0 0 auto;
+  border: 0;
+  background: none;
+  padding: 4px 0 4px 8px;
+  color: #aaa;
+  font-size: 18px;
+  line-height: 1;
+  letter-spacing: 2px;
+  cursor: default;
+}
+
+.review-card__subscribe {
+  flex: 0 0 auto;
+  border: 0;
+  background: none;
+  padding: 2px 0;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2e9d4c;
+  cursor: default;
+  white-space: nowrap;
+}
